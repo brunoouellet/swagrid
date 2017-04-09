@@ -1,0 +1,5 @@
+$prefix: col; // Prefix you want to use in your markup. Ex: <div class="col col-1-3">
+$gutter: 30px; // Space between two elements, in PX
+$max: 6; // Maximum number of divisions
+$container: container; // Class name of your container
+$direction: left; // Floating direction of the blocks. Default: left.
