@@ -1,0 +1,11 @@
+// Prefix you want to use in the class name. Ex: <div class="col-1-3">
+$prefix: col;
+
+// Class name of the container
+$container: container;
+
+// Space between two elements, in PX
+$gutter: 30px;
+
+// Maximum number of subdivisions
+$max: 6;

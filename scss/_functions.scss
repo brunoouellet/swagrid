@@ -1,0 +1,55 @@
+$-placeholders: ();
+
+@function placeholder-exists($name) {
+  @if index($-placeholders, $name) == null {
+    @return false;
+  }
+  @return true;
+}
+
+@function -register-placeholder($name) {
+  @if placeholder-exists($name) {
+    @error 'The key `#{$name}` has already been registered.';
+  }
+  $-placeholders: append($-placeholders, $name) !global;
+  @return $name;
+}
+
+@function getGCD($a, $b)
+{
+	$a: abs($a);
+	$b: abs($b);
+	@if $b == 0 {
+		@return $a;
+	}
+	@return getGCD($b, $a % $b);
+}
+
+@function simplify($num, $den)
+{
+	$gcd: getGCD($num, $den);
+	@if round($gcd) == $gcd {
+		$simple_num: $num/$gcd;
+		$simple_den: $den/$gcd;
+		$class: #{$prefix}-#{$simple_num}-#{$simple_den};
+		@return $class;
+	}
+	@else {
+		@return false;
+	}
+}
+
+@function getWidth($ratio)
+{
+	@return calc((#{cleanRatio($ratio)} * 100%) - #{$gutter});
+}
+
+@function cleanRatio($ratio)
+{
+	@if is-number($ratio) and unit($ratio) == '%' {
+		@return $ratio / 100%;
+	}
+	@else {
+		@return $ratio;
+	}
+}

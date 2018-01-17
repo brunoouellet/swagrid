@@ -1,0 +1,37 @@
+@mixin define-placeholder($name)
+{
+  %#{$name} {
+    $name: -register-placeholder($name);
+    @content;
+  }
+}
+
+@mixin col($ratio)
+{
+  width: getWidth(cleanRatio($ratio));
+  box-sizing: border-box;
+  @content;
+}
+
+@mixin generateColumns
+{
+  @for $num from 1 through $max {
+    @for $den from $num through $max {
+      @if $num < $den {
+        @include define-placeholder(#{$prefix}-#{$num}-#{$den}) {
+          @include col($num/$den);
+        }
+        @if simplify($num,$den) {
+          .#{$prefix}-#{$num}-#{$den} {
+            @extend %#{simplify($num,$den)};
+          }
+        }
+        @else {
+          .#{$prefix}-#{$num}-#{$den} {
+            @include col($num/$den);
+          }
+        }
+      }
+    }
+  }
+}
