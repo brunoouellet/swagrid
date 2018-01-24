@@ -41,7 +41,7 @@ $-placeholders: ();
 
 @function getWidth($ratio)
 {
-	@return calc((#{cleanRatio($ratio)} * 100%) - #{$gutter});
+	@return calc(percentage(#{cleanRatio($ratio)}) - #{$gutter});
 }
 
 @function cleanRatio($ratio)
